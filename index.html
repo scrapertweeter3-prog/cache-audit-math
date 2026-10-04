@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A cached answer you never audited is a liability with a discount</title>
+<style>
+body{font-family:Georgia,serif;max-width:680px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#1a1a1a;background:#faf9f6}
+h1{font-size:1.6rem;line-height:1.3}
+p{margin:0 0 1.1em}
+a{color:#0a58ca}
+footer{margin-top:2rem;font-size:.85rem;color:#666}
+</style>
+</head>
+<body>
+<article>
+<h1>A cached answer you never audited is a liability with a discount</h1>
+<p>Serving-cost pages treat cache pricing as pure win: the same question twice bills the second read at a tenth of the first. What the pricing page leaves out is who owns the answer once it sits in the cache. The audit shape at <a href="https://pastagi.com/">PastAGI</a>, where every cost claim gets replayed against real traffic, applies to the cache twice over, because a cached response carries both a price and an age.</p>
+<p>Take a policy-bot billed at $3 per million input tokens with prompt caching on. The cold path is a 5,000-token call, system prompt and question together, billed fresh. Warm, the platform reuses 3,900 tokens of the prefix at a 90 percent discount and reads only the changed 1,100 at full price, so a warm call costs 0.45 cents against 1.5 cents cold. One thousand cold calls a day run $15.00. The same thousand calls, 70 percent warm, run $7.63. The saving is $7.37 per day, and the cached share of those answers has quietly stopped being re-read by anyone.</p>
+<p>Now change the policy document. Every pricing guide prints the 90 percent figure next to the discount and stops there. The audit question is the warm fraction itself: with a 24-hour cache window, what share of production calls hit a prefix that predates the current policy? Nobody on the team can answer it, because the dashboard shows hit rate and nothing else. Two revisions land in a busy month and the warm fraction is carrying answers composed against the old document for hours until someone notices the bot citing a section that no longer exists.</p>
+<p>The check costs one query: log prefix age at call time and read the distribution weekly. If the 95th-percentile prefix is older than the last content revision, the discount came out of correctness, and the fix is a cache version bump wired to the publish step. That same week is also when the stale-answer complaints stop.</p>
+<p>Price the cache the way the rest of the ledger is priced: dollars saved per warm call against dollars at risk per stale one. The discount is real, and it is a tenth of the story.</p>
+</article>
+<footer>cache-audit-math</footer>
+</body>
+</html>
